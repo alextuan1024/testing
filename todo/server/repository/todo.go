@@ -11,7 +11,7 @@ type ToDoImpl struct {
 
 type ToDo interface {
 	List(limit int32, notCompleted bool) ([]*pb.Todo, error)
-	Insert(items *pb.Todo)  error
+	Insert(items *pb.Todo) error
 	Get(id string) (*pb.Todo, error)
 	Delete(id string) error
 }
@@ -32,18 +32,18 @@ func (r ToDoImpl) List(limit int32, notCompleted bool) ([]*pb.Todo, error) {
 	return items, nil
 }
 
-func (r ToDoImpl) Insert(items *pb.Todo)  error {
+func (r ToDoImpl) Insert(items *pb.Todo) error {
 	err := r.DB.Insert(items)
 	return err
 }
 
 func (r ToDoImpl) Get(id string) (*pb.Todo, error) {
-		var item pb.Todo
-		err := r.DB.Model(&item).Where("id = ?", id).First()
-		if err != nil {
-			return nil, err
-		}
-		return &item, nil
+	var item pb.Todo
+	err := r.DB.Model(&item).Where("id = ?", id).First()
+	if err != nil {
+		return nil, err
+	}
+	return &item, nil
 }
 
 func (r ToDoImpl) Delete(id string) error {
