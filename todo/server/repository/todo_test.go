@@ -1,4 +1,4 @@
-// build integration persistence
+// +build integration persistence
 
 package repository
 
